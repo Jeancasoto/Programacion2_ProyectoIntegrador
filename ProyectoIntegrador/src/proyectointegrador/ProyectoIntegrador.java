@@ -1,6 +1,7 @@
 package proyectointegrador;
 
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class ProyectoIntegrador {
 
@@ -60,6 +61,136 @@ public class ProyectoIntegrador {
                             + 18
                             + "\n\n");
                     imprimirmatrizrecursiva(matriz1, 0, 0);
+                    int turno = 1;
+
+                    String pos1;
+                    String pos2;
+
+                    if (turno == 1) {
+                        try {
+                            System.out.println("---Rebeldes---");
+                            System.out.println("Ingrese la coordenada de la pieza que desea mover, separada por una ',' ");
+                            pos1 = sc.next();
+                            System.out.println("Ingrese la posicion a la que desea mover , separado por una ',' ");
+                            pos2 = sc.next();
+
+                            while (pos1.equals("0,0")
+                                    || pos1.equals("0,1")
+                                    || pos1.equals("1,0")
+                                    || pos1.equals("1,1")
+                                    || pos1.equals("0,17")
+                                    || pos1.equals("0,18")
+                                    || pos1.equals("1,17")
+                                    || pos1.equals("1,18")
+                                    || pos1.equals("17,17")
+                                    || pos1.equals("17,18")
+                                    || pos1.equals("18,17")
+                                    || pos1.equals("18,18")
+                                    || pos1.equals("17,0")
+                                    || pos1.equals("17,1")
+                                    || pos1.equals("18,0")
+                                    || pos1.equals("18,1")
+                                    //-----------------------
+                                    || pos2.equals("0,0")
+                                    || pos2.equals("0,1")
+                                    || pos2.equals("1,0")
+                                    || pos2.equals("1,1")
+                                    || pos2.equals("0,17")
+                                    || pos2.equals("0,18")
+                                    || pos2.equals("1,17")
+                                    || pos2.equals("1,18")
+                                    || pos2.equals("17,17")
+                                    || pos2.equals("17,18")
+                                    || pos2.equals("18,17")
+                                    || pos2.equals("18,18")
+                                    || pos2.equals("17,0")
+                                    || pos2.equals("17,1")
+                                    || pos2.equals("18,0")
+                                    || pos2.equals("18,1")) {
+                                JOptionPane.showMessageDialog(null, "Los rebeldes no pueden moverse a\nlas zonas de las esquinas");
+
+                                System.out.println("Equipo de 'Rebeldes' Intentelo de nuevo\n");
+                                System.out.println("Ingrese la coordenada de la pieza que desea mover, separada por una ',' ");
+                                pos1 = sc.next();
+                                System.out.println("Ingrese la posicion a la que desea mover , separado por una ',' ");
+                                pos2 = sc.next();
+                            }
+
+                            String[] tokens1 = pos1.split(",");
+                            String[] tokens2 = pos2.split(",");
+
+                            if ((int) Integer.parseInt(String.valueOf(tokens1[0])) > 18
+                                    || (int) Integer.parseInt(String.valueOf(tokens1[1])) > 18
+                                    || (int) Integer.parseInt(String.valueOf(tokens2[0])) > 18
+                                    || (int) Integer.parseInt(String.valueOf(tokens2[1])) > 18
+                                    || (int) Integer.parseInt(String.valueOf(tokens1[0])) < 0
+                                    || (int) Integer.parseInt(String.valueOf(tokens1[1])) < 0
+                                    || (int) Integer.parseInt(String.valueOf(tokens2[0])) < 0
+                                    || (int) Integer.parseInt(String.valueOf(tokens2[1])) < 0) {
+
+                                JOptionPane.showMessageDialog(null, "Debe introducir valores existentes del tablero [18>x>0]");
+
+                                System.out.println("Intentelo de nuevo\n");
+                                System.out.println("Ingrese la coordenada de la pieza que desea mover, separada por una ',' ");
+                                pos1 = sc.next();
+                                System.out.println("Ingrese la posicion a la que desea mover , separado por una ',' ");
+                                pos2 = sc.next();
+                            }
+                            tokens1 = pos1.split(",");
+                            tokens2 = pos2.split(",");
+                            /*
+                             for (int k = 0; k < 19; k++) {
+                             System.out.print(k+ "  ");
+                             }
+                             System.out.println();
+                             */
+                            Rebeldes r = new Rebeldes();
+
+                            /*
+                             System.out.println("*"+tokens1[0]);
+                             System.out.println("**"+tokens1[1]);
+                             System.out.println("*"+tokens2[0]);
+                             System.out.println("**"+tokens2[1]);
+                             */
+                            //r.movimiento(matriz1, (int) pos1.charAt(0), (int) pos1.charAt(2), (int) pos2.charAt(0), (int) pos2.charAt(2));
+                            if ((int) Integer.parseInt(String.valueOf(tokens1[0]))
+                                    == (int) Integer.parseInt(String.valueOf(tokens2[0]))
+                                    || (int) Integer.parseInt(String.valueOf(tokens1[1]))
+                                    == (int) Integer.parseInt(String.valueOf(tokens2[1]))) {
+
+                                if (r.movimiento(matriz1, (int) Integer.parseInt(String.valueOf(tokens1[0])),
+                                        (int) Integer.parseInt(String.valueOf(tokens1[1])),
+                                        (int) Integer.parseInt(String.valueOf(tokens2[0])),
+                                        (int) Integer.parseInt(String.valueOf(tokens2[1]))) == false) {
+
+                                    imprimirmatrizrecursiva(movimientoR(matriz1, (int) Integer.parseInt(String.valueOf(tokens1[0])),
+                                            (int) Integer.parseInt(String.valueOf(tokens1[1])), (int) Integer.parseInt(String.valueOf(tokens2[0])),
+                                            (int) Integer.parseInt(String.valueOf(tokens2[1]))),
+                                            0, 0);
+
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No puede pasar encima de otra pieza, pierde turno");
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No puede mover en diagonal, pierde turno");
+                            }
+
+                            //imprimirmatrizrecursiva(movimientoR(matriz1,Integer.parseInt(String.valueOf(pos1.charAt(0))),Integer.parseInt(String.valueOf(pos1.charAt(2))),Integer.parseInt(String.valueOf(pos2.charAt(0))),Integer.parseInt(String.valueOf(pos2.charAt(2)))),0,0);
+                            turno = 2;
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Ingreso un dato incorrecto");
+                        }
+                    }
+
+                    if (turno == 2) {
+                        System.out.println("---Rey y sus duques---");
+                        System.out.println("Ingrese la coordenada de la pieza que desea mover, separada por una ',' ");
+                        pos1 = sc.next();
+                        System.out.println("Ingrese la posicion a la que desea mover , separado por una ',' ");
+                        pos2 = sc.next();
+                        turno = 1;
+                    }
                     break;
 
                 case 2:
@@ -92,8 +223,7 @@ public class ProyectoIntegrador {
                             + "el mismo podre ser comido cuando tenga piezas rivales arriba y a los lados ");
                     break;
                 case 3:
-                    String cadena = "pene";
-                    System.out.println(Integer.toBinaryString(Integer.parseInt(cadena)));
+                    resp = 'n';
 
                     break;
 
@@ -119,53 +249,53 @@ public class ProyectoIntegrador {
                 if (j < 2 && i < 2 || i < 2 && j > 16 || i > 16 && j < 2 || i > 16 && j > 16) {
                     matriz[i][j] = "#";
                 } else if (i == 0 && j == 2 || i == 0 && j == 5 || i == 0 && j == 13 || i == 0 && j == 16) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 2 && j == 0 || i == 2 && j == 5 || i == 2 && j == 13 || i == 2 && j == 18) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 3 && j == 7 || i == 3 && j == 9 || i == 3 && j == 11) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 4 && j == 6 || i == 4 && j == 12) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 5 && j == 0 || i == 5 && j == 2 || i == 5 && j == 5 || i == 5 && j == 13 || i == 5 && j == 16 || i == 5 && j == 18) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 6 && j == 4 || i == 6 && j == 14) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 7 && j == 3 || i == 7 && j == 15) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 9 && j == 3 || i == 9 && j == 15) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 11 && j == 3 || i == 11 && j == 15) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 12 && j == 4 || i == 12 && j == 14) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 13 && j == 0 || i == 13 && j == 2 || i == 13 && j == 5 || i == 13 && j == 13 || i == 13 && j == 16 || i == 13 && j == 18) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 14 && j == 6 || i == 14 && j == 12) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 15 && j == 7 || i == 15 && j == 9 || i == 15 && j == 11) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 16 && j == 0 || i == 16 && j == 5 || i == 16 && j == 13 || i == 16 && j == 18) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 18 && j == 2 || i == 18 && j == 5 || i == 18 && j == 13 || i == 18 && j == 16) {
-                    matriz[i][j] = "®";
+                    matriz[i][j] = "R";
                 } else if (i == 4 && j == 8 || i == 4 && j == 10) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 6 && j == 9) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 7 && j == 8 || i == 7 && j == 10) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 8 && j == 4 || i == 8 && j == 7 || i == 8 && j == 9 || i == 8 && j == 11 || i == 8 && j == 14) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 9 && j == 6 || i == 9 && j == 8 || i == 9 && j == 10 || i == 9 && j == 12) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 10 && j == 4 || i == 10 && j == 7 || i == 10 && j == 9 || i == 10 && j == 11 || i == 10 && j == 14) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 11 && j == 8 || i == 11 && j == 10) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 12 && j == 9) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 14 && j == 8 || i == 14 && j == 10) {
-                    matriz[i][j] = "■";
+                    matriz[i][j] = "D";
                 } else if (i == 9 && j == 9) {
                     matriz[i][j] = "@";
                 }
@@ -237,5 +367,20 @@ public class ProyectoIntegrador {
      + 18
      +"\n\n");
      imprimirmatrizrecursiva(matriz1,0,0);
+    
+     ■
+     ®
+     ■
      */
+
+    public static String[][] movimientoR(String[][] matriz, int x, int y, int nx, int ny) {
+
+        if (matriz[x][y].equals("R")) {
+            matriz[x][y] = " ";
+            matriz[nx][ny] = "R";
+        }
+
+        return matriz;
+    }
+
 }

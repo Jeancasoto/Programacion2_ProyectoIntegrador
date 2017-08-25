@@ -2,6 +2,6 @@
 package proyectointegrador;
 
 
-public class Pieza {
-    
+public abstract class Pieza {
+   
 }
