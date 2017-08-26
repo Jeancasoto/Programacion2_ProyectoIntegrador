@@ -54,8 +54,8 @@ public class Rey extends Pieza implements Complemento {
 
     @Override
     public boolean ganaelrey(String[][] matriz) {
-         boolean b = false;
-
+        boolean b = false;
+        int cont=0;
         if (matriz[0][0].equals("@")
                 || matriz[0][1].equals("@")
                 || matriz[1][0].equals("@")
@@ -73,21 +73,51 @@ public class Rey extends Pieza implements Complemento {
                 || matriz[18][0].equals("@")
                 || matriz[18][1].equals("@")) {
 
-            b = true;
+            cont++;
 
         }
-
+        if (cont!=0) {
+            b=true;
+        }
         return b;
     }
-    @Override
+   @Override
     public boolean pierdeelrey(String[][] matriz) {
-        boolean b=false;
+        boolean b = false;
+        int cont=0;
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
-                if (!matriz[i][j].equals("@")) {
-                    b=true;
+                if (matriz[i][j].equals("@")) {
+                    cont++;
                 }
             }
+        }
+        if (cont!=0) {
+            b=true;
+        }
+        return b;
+    }
+     @Override
+    public boolean comer(String[][] matriz, int nx, int ny) {
+        
+        
+        return false;
+    }
+    
+    @Override
+    public boolean pierdenrebeldes(String[][] matriz) {
+        boolean b=false;
+        int cont=0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                if (matriz[i][j].equals
+                    ("R")) {
+                    cont++;
+                }
+            }
+        }
+        if (cont!=0) {
+            b=true;
         }
         return b;
     }

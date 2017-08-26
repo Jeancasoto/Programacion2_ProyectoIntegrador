@@ -52,10 +52,10 @@ public class Rebeldes extends Pieza implements Complemento {
 
     }
 
-    @Override
+   @Override
     public boolean ganaelrey(String[][] matriz) {
-         boolean b = false;
-
+        boolean b = false;
+        int cont=0;
         if (matriz[0][0].equals("@")
                 || matriz[0][1].equals("@")
                 || matriz[1][0].equals("@")
@@ -73,23 +73,78 @@ public class Rebeldes extends Pieza implements Complemento {
                 || matriz[18][0].equals("@")
                 || matriz[18][1].equals("@")) {
 
-            b = true;
+            cont++;
 
         }
-
+        if (cont!=0) {
+            b=true;
+        }
         return b;
     }
+
     @Override
     public boolean pierdeelrey(String[][] matriz) {
-        boolean b=false;
+        boolean b = false;
+        int cont=0;
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
-                if (!matriz[i][j].equals("@")) {
-                    b=true;
+                if (matriz[i][j].equals("@")) {
+                    cont++;
                 }
             }
         }
+        if (cont!=0) {
+            b=true;
+        }
         return b;
     }
 
+    @Override
+    public boolean comer(String[][] matriz, int nx, int ny) {
+        boolean b = false;
+        int cont = 0;
+      //  if (nx > 0 && ny > 0 && nx < matriz.length - 1 && ny < matriz.length - 1) {
+
+        if (matriz[nx + 1][ny].equals("D") && matriz[nx - 1][ny].equals("D")) {
+            cont++;
+        }
+        if (matriz[nx][ny - 1].equals("D") && matriz[nx][ny + 1].equals("D")) {
+            cont++;
+        }
+        if (matriz[nx - 1][ny].equals("D") && matriz[nx + 1][ny].equals("@")) {
+            cont++;
+        }
+        if (matriz[nx - 1][ny].equals("@") && matriz[nx + 1][ny].equals("D")) {
+            cont++;
+        }
+        if (matriz[nx][ny - 1].equals("D") && matriz[nx][ny + 1].equals("@")) {
+            cont++;
+        }
+        if (matriz[nx][ny - 1].equals("@") && matriz[nx][ny + 1].equals("D")) {
+            cont++;
+        }
+
+        //   }
+        if (cont != 0) {
+            b = true;
+        }
+        return b;
+    }
+@Override
+    public boolean pierdenrebeldes(String[][] matriz) {
+        boolean b=false;
+        int cont=0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                if (matriz[i][j].equals
+                    ("R")) {
+                    cont++;
+                }
+            }
+        }
+        if (cont!=0) {
+            b=true;
+        }
+        return b;
+    }
 }
