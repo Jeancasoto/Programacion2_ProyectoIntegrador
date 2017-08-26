@@ -10,6 +10,7 @@ public class ProyectoIntegrador {
     public static void main(String[] args) {
         int i = 19;
         int j = 19;
+        int cont=0;
         String[][] matriz = Matriz(i, j);
         String[][] matriz1 = (matrizmejorada(matriz, i, j));
         //imprimir(matrizmejorada(matriz, i, j));
@@ -80,7 +81,9 @@ public class ProyectoIntegrador {
                                 pos2 = sc.next();
                                 System.out.println("Ingrese la posicion de la pieza que desea comer, separado por una ','");
                                 pos3 = sc.next();
-
+                               
+                                
+                                
                                 while (pos1.equals("0,0")
                                         || pos1.equals("0,1")
                                         || pos1.equals("1,0")
@@ -202,7 +205,7 @@ public class ProyectoIntegrador {
                                                 (int) Integer.parseInt(String.valueOf(tokens2[1])));
                                         // imprimirmatrizrecursiva(matriz,(int) Integer.parseInt(String.valueOf(tokens3[0])),(int) Integer.parseInt(String.valueOf(tokens3[1])));
 
-                                       // imprimirmatrizrecursiva(matriz, 0, 0);
+                                     
                                        // System.out.println("-----------");
                                        // System.out.println("#######" + d.comer(matriz, (int) Integer.parseInt(String.valueOf(tokens3[0])), (int) Integer.parseInt(String.valueOf(tokens3[1]))));
                                         
@@ -215,10 +218,86 @@ public class ProyectoIntegrador {
                                         }
                                             
                                         }
-                                     
+                                         System.out.print(" " + 0
+                                + "   "
+                                + 1
+                                + "   "
+                                + 2
+                                + "   "
+                                + 3
+                                + "   "
+                                + 4
+                                + "   "
+                                + 5
+                                + "   "
+                                + 6
+                                + "   "
+                                + 7
+                                + "   "
+                                + 8
+                                + "   "
+                                + 9
+                                + "  "
+                                + 10
+                                + "  "
+                                + 11
+                                + "  "
+                                + 12
+                                + "  "
+                                + 13
+                                + "  "
+                                + 14
+                                + "  "
+                                + 15
+                                + "  "
+                                + 16
+                                + "  "
+                                + 17
+                                + "  "
+                                + 18
+                                + "\n");
+                                        imprimirmatrizrecursiva(matriz, 0, 0);
+                                        System.out.println("\n");
                                            
                                         if (d.comer(matriz, (int) Integer.parseInt(String.valueOf(tokens3[0])), (int) Integer.parseInt(String.valueOf(tokens3[1]))) == true) {
-
+                                             System.out.print(" " + 0
+                                + "   "
+                                + 1
+                                + "   "
+                                + 2
+                                + "   "
+                                + 3
+                                + "   "
+                                + 4
+                                + "   "
+                                + 5
+                                + "   "
+                                + 6
+                                + "   "
+                                + 7
+                                + "   "
+                                + 8
+                                + "   "
+                                + 9
+                                + "  "
+                                + 10
+                                + "  "
+                                + 11
+                                + "  "
+                                + 12
+                                + "  "
+                                + 13
+                                + "  "
+                                + 14
+                                + "  "
+                                + 15
+                                + "  "
+                                + 16
+                                + "  "
+                                + 17
+                                + "  "
+                                + 18
+                                + "\n\n");
                                            imprimirmatrizrecursiva(nuevamatrizr(matriz, (int) Integer.parseInt(String.valueOf(tokens3[0])), (int) Integer.parseInt(String.valueOf(tokens3[1]))), 0, 0);
                                         } else {
                                             JOptionPane.showMessageDialog(null, "No hay cambios en la matriz, no se pudo comer");
@@ -406,7 +485,12 @@ public class ProyectoIntegrador {
                                             JOptionPane.showMessageDialog(null, "No hay cambios en la matriz, no se pudo comer");
                                         }
                                        
-                                        
+                                        if (pos1.equals("9,9")) {
+                                    cont++;
+                                    if (cont!=0) {
+                                        JOptionPane.showMessageDialog(null, "Cuando el rey sale del castillo no puede volver a entrar");
+                                    }
+                                }
 
                                     } else {
                                         JOptionPane.showMessageDialog(null, "No puede pasar encima de otra pieza, pierde turno");
